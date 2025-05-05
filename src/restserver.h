@@ -3,18 +3,21 @@
 #include <memory>
 #include <cpprest/http_listener.h>
 
-class Restserver
+namespace shan
 {
-public:
-    Restserver();
-    ~Restserver() = default;
+	class Restserver
+	{
+	public:
+		Restserver();
+		~Restserver() = default;
 
-    void Run();
+		void Run();
 
-private:
-    void Init();
-    void RequestHandler(web::http::http_request request);
+	private:
+		void Init();
+		void RequestHandler(web::http::http_request request);
 
-private:
-    std::unique_ptr<web::http::experimental::listener::http_listener> m_pListener;
-};
+	private:
+		std::unique_ptr<web::http::experimental::listener::http_listener> m_pListener;
+	};
+}
