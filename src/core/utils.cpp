@@ -2,13 +2,13 @@
 
 #include <cpprest/asyncrt_utils.h>
 
-namespace shan 
+namespace shan
 {
-    namespace utils
-    {
-        std::string ToString(const std::wstring& str)
-        {
-            return utility::conversions::to_utf8string(str);
-        }
-    }
+namespace utils
+{
+std::string ToString(const std::wstring &str)
+{
+    return utility::conversions::to_utf8string(str);
 }
+} // namespace utils
+} // namespace shan

@@ -8,6 +8,9 @@ RestRegistrator &RestRegistrator::GetInstance()
     return restRegistrator;
 }
 
-void RestRegistrator::Register(const std::string& path, const std::string& method, const std::function<void(web::http::http_request)>& handler)
+void RestRegistrator::Register(
+    const std::string &path,
+    const std::string &method,
+    const std::function<void(web::http::http_request)> &handler)
 {
 }

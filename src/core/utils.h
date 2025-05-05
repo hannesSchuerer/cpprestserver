@@ -4,8 +4,8 @@
 
 namespace shan
 {
-	namespace utils
-	{
-		std::string ToString(const std::wstring& str);
-	}
+namespace utils
+{
+std::string ToString(const std::wstring &str);
 }
+} // namespace shan
