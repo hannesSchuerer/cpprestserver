@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "log.h"
+#include "restregistrator.h"
 #include "utils.h"
 
 namespace shan
@@ -59,17 +60,26 @@ void Restserver::RequestHandler(web::http::http_request request)
     SHAN_LOG_TRACE("Recieved request:\n{}\n",
                    shan::utils::ToString(request.to_string()));
 
-    const utility::string_t &path = request.relative_uri().path();
-    const std::vector<utility::string_t> splittedPath =
-        web::uri::split_path(path);
+    const utility::string_t path = request.relative_uri().path();
 
-    for (const auto &split : splittedPath)
-        std::cout << split.c_str() << std::endl;
+    HandlerFunc &test = RestRegistrator::GetInstance().GetHandler(
+        utility::conversions::to_utf8string(path),
+        "POST");
 
-    request.reply(web::http::status_codes::OK);
-    SHAN_LOG_TRACE(
-        "Replied with:\n{}\n",
-        shan::utils::ToString(request.get_response().get().to_string()));
+    if (!test)
+    {
+        SHAN_LOG_ERROR("Path or method is not defined!");
+
+        request.reply(web::http::status_codes::NotFound,
+                      "Path or method is not defined!");
+        SHAN_LOG_TRACE(
+            "Replied with:\n{}\n",
+            utils::ToString(request.get_response().get().to_string()));
+    }
+    else
+    {
+        test(request);
+    }
 }
 //------------------------------------------------------------------------------
 } // namespace shan
