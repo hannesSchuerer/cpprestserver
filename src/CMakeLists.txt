@@ -7,7 +7,7 @@ target_link_libraries(
     ${LIB_RESTSERVER_NAME}
     PRIVATE spdlog::spdlog
     PRIVATE cxxopts::cxxopts
-    PRIVATE cpprestsdk::cpprestsdk)
+    PUBLIC cpprestsdk::cpprestsdk)
 
 target_include_directories(${LIB_RESTSERVER_NAME}
                            PUBLIC ${LIB_RESTSERVER_INCLUDES})
